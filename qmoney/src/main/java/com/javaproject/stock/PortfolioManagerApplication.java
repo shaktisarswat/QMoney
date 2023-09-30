@@ -4,6 +4,7 @@ package com.javaproject.stock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.javaproject.stock.dto.PortfolioTrade;
+import com.javaproject.stock.file.IFilePathLocator;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +16,9 @@ import java.util.logging.Logger;
 
 
 public class PortfolioManagerApplication {
-
-    public static List<String> mainReadFile(String filename) throws IOException, URISyntaxException {
-        File file = new File("C:\\Users\\shakti_sarswat\\Desktop\\JAVA\\QMoney\\qmoney\\src\\main\\resources\\trades.json");
+    public static List<String> mainReadFile(String args[], String resourceType) throws IOException, URISyntaxException {
+        String path = IFilePathLocator.ABSOLUTE_SOURCE_PATH + resourceType + args[0];
+        File file = new File(path);
         ObjectMapper objectMapper = PortfolioManagerApplication.getObjectMapper();
 
         PortfolioTrade[] portfolioTrades = objectMapper.readValue(file, PortfolioTrade[].class);
@@ -48,11 +49,8 @@ public class PortfolioManagerApplication {
 
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-//        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
-//        ThreadContext.put("runId", UUID.randomUUID().toString());
-
-        String arg1 = "trade.json";
-        printJsonObject(mainReadFile(arg1));
+        String fileName = "trades.json";
+        printJsonObject(mainReadFile(new String[]{fileName}, IFilePathLocator.MAIN_JAVA_RESOURCE));
 
     }
 }

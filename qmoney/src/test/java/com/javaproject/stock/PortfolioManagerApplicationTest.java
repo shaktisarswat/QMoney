@@ -1,5 +1,6 @@
 package com.javaproject.stock;
 
+import com.javaproject.stock.file.IFilePathLocator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class PortfolioManagerApplicationTest {
 
         //when
         List<String> results = PortfolioManagerApplication
-                .mainReadFile(Arrays.toString(new String[]{filename}));
+                .mainReadFile(new String[]{filename}, IFilePathLocator.TEST_JAVA_RESOURCE);
 
         //then
         Assertions.assertEquals(expected, results);
