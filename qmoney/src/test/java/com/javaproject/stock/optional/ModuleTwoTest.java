@@ -2,6 +2,7 @@ package com.javaproject.stock.optional;
 
 import com.javaproject.stock.PortfolioManagerApplication;
 import com.javaproject.stock.dto.PortfolioTrade;
+import com.javaproject.stock.file.IFilePathLocator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class ModuleTwoTest {
         List<String> expected = Arrays.asList(new String[]{"MSFT", "CSCO", "CTS"});
 
         //when
-        List<PortfolioTrade> trades = PortfolioManagerApplication.readTradesFromJson(filename);
+        List<PortfolioTrade> trades = PortfolioManagerApplication.readTradesFromJson(filename, IFilePathLocator.TEST_JAVA_RESOURCE);
         List<String> actual = trades.stream().map(PortfolioTrade::getSymbol).collect(Collectors.toList());
 
         //then

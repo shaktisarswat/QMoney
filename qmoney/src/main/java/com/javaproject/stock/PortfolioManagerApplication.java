@@ -3,9 +3,7 @@ package com.javaproject.stock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.javaproject.stock.dto.PortfolioTrade;
-import com.javaproject.stock.dto.TiingoCandle;
-import com.javaproject.stock.dto.TotalReturnsDto;
+import com.javaproject.stock.dto.*;
 import com.javaproject.stock.file.IFilePathLocator;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +13,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +26,7 @@ public class PortfolioManagerApplication {
     private final static String TIINGO_API_TOKEN = "486e149efa731d136eedba8e6ca4fce225c0c650";
 
     public static @NotNull List<String> mainReadFile(@NotNull String[] args, @NotNull String resourceType) throws IOException {
-        String path = getPath(args, resourceType);
+        String path = getPath(args[0], resourceType);
         File file = new File(path);
         ObjectMapper objectMapper = PortfolioManagerApplication.getObjectMapper();
 
@@ -42,8 +41,8 @@ public class PortfolioManagerApplication {
     }
 
     @NotNull
-    private static String getPath(@NotNull String[] args, @NotNull String resourceType) {
-        return IFilePathLocator.ABSOLUTE_SOURCE_PATH + resourceType + args[0];
+    private static String getPath(@NotNull String fileName, @NotNull String resourceType) {
+        return IFilePathLocator.ABSOLUTE_SOURCE_PATH + resourceType + fileName;
     }
 
     private static void printJsonObject(@NotNull Object object) throws IOException {
@@ -68,7 +67,7 @@ public class PortfolioManagerApplication {
         String endDate = args[1];
         LocalDate date = LocalDate.parse(endDate);
 
-        String path = getPath(args, resourceType);
+        String path = getPath(args[0], resourceType);
         File file = new File(path);
 
         ObjectMapper objectMapper = PortfolioManagerApplication.getObjectMapper();
@@ -118,8 +117,9 @@ public class PortfolioManagerApplication {
         return result;
     }
 
-    public static List<PortfolioTrade> readTradesFromJson(String filename) throws IOException, URISyntaxException {
-        File file = resolveFileFromResources(filename);
+    public static List<PortfolioTrade> readTradesFromJson(String filename, String resourceType) throws IOException, URISyntaxException {
+        String path = getPath(filename, resourceType);
+        File file = new File(path);
         List<PortfolioTrade> portfolioTrade = Arrays.asList(getObjectMapper().readValue(file, PortfolioTrade[].class));
         return portfolioTrade;
     }
@@ -132,11 +132,81 @@ public class PortfolioManagerApplication {
         return String.format("https://api.tiingo.com/tiingo/daily/%s/prices?startDate=%s&endDate=%s&token=%s", trade.getSymbol(), trade.getPurchaseDate().toString(), endDate.toString(), token);
     }
 
+    static Double getOpeningPriceOnStartDate(List<Candle> candles) {
+        Candle startCandleObject = candles.get(0);
+        return startCandleObject.getOpen();
+    }
 
-    public static void main(String[] args) throws IOException {
+    public static List<Candle> fetchCandles(PortfolioTrade trade, LocalDate endDate) {
+        String url = prepareUrl(trade, endDate, TIINGO_API_TOKEN);
+        RestTemplate restTemplate = new RestTemplate();
+        TiingoCandle[] tiingoCandles = restTemplate.getForObject(url, TiingoCandle[].class);
+        return Arrays.asList(tiingoCandles);
+    }
+
+    public static List<AnnualizedReturn> mainCalculateSingleReturn(String[] args, String resourceType) throws IOException, URISyntaxException {
+        LocalDate endDate = LocalDate.parse(args[1]);
+        String path = getPath(args[0], resourceType);
+        File file = new File(path);
+        ObjectMapper objectMapper = PortfolioManagerApplication.getObjectMapper();
+        // Extracted all the PortfolioTrades objects for symbol and purchased date
+        PortfolioTrade[] portfolioTrades = objectMapper.readValue(file, PortfolioTrade[].class);
+        ArrayList<AnnualizedReturn> annualizedReturns = new ArrayList<>();
+
+        Double buyPrice, sellPrice;
+
+        for (PortfolioTrade portfolioTrade : portfolioTrades) {
+            List<Candle> tiingoCandles = fetchCandles(portfolioTrade, endDate);
+            buyPrice = getOpeningPriceOnStartDate(tiingoCandles);
+            sellPrice = getClosingPriceOnEndDate(tiingoCandles);
+            annualizedReturns.add(calculateAnnualizedReturns(endDate, portfolioTrade, buyPrice, sellPrice));
+        }
+
+        Collections.sort(annualizedReturns, (a1, a2) -> {
+            if (a1.getAnnualizedReturn() >= a2.getAnnualizedReturn()) {
+                return -1;
+            } else return 1;
+
+        });
+
+        return annualizedReturns;
+
+    }
+
+    // Now that you have the list of PortfolioTrade and their data, calculate annualized returns
+    // for the stocks provided in the Json.
+    // Use the function you just wrote #calculateAnnualizedReturns.
+    // Return the list of AnnualizedReturns sorted by annualizedReturns in descending order.
+    public static AnnualizedReturn calculateAnnualizedReturns(LocalDate endDate, PortfolioTrade trade, Double buyPrice, Double sellPrice) {
+        int quantity = trade.getQuantity();
+        Double totalSoldValue = quantity * sellPrice;
+        Double totalBoughtValue = quantity * buyPrice;
+
+        Double totalReturn = (totalSoldValue - totalBoughtValue) / totalBoughtValue;
+        LocalDate start = trade.getPurchaseDate();
+
+        Long days = ChronoUnit.DAYS.between(start, endDate);
+
+        String dayString = days.toString();
+        Double totalDays = Double.valueOf(dayString);
+        Double totalYear = totalDays / 365.0;
+        Double annualReturn = (Math.pow((1 + totalReturn), (1 / totalYear))) - 1;
+        return new AnnualizedReturn(trade.getSymbol(), annualReturn, totalReturn);
+    }
+
+
+    public static Double getClosingPriceOnEndDate(List<Candle> candles) {
+        Candle lastCandleObject = candles.get(candles.size() - 1);
+        return lastCandleObject.getClose();
+    }
+
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
         String fileName = "trades.json";
+        String endDate="2019-12-20";
         printJsonObject(mainReadFile(new String[]{fileName}, IFilePathLocator.MAIN_JAVA_RESOURCE));
-        printJsonObject(mainReadQuotes(new String[]{fileName}, IFilePathLocator.MAIN_JAVA_RESOURCE));
+        printJsonObject(mainReadQuotes(new String[]{fileName,endDate}, IFilePathLocator.MAIN_JAVA_RESOURCE));
+        printJsonObject(mainCalculateSingleReturn(new String[]{fileName,endDate},IFilePathLocator.MAIN_JAVA_RESOURCE));
     }
 }
 

@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8306d257-2002-49c1-840b-2f87226643a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/dto/Candle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/dto/TiingoCandle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/dto/TotalReturnsDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleOneTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleTwoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/resources/empty.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/resources/trades_invalid_dates.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/resources/trades_invalid_stock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/resources/trades_old.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleThreeRefactorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleThreeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/dto/PortfolioTrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/dto/PortfolioTrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/PortfolioManagerApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/PortfolioManagerApplicationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,15 +70,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "18",
-    "last_opened_file_path": "C:/Users/shakti_sarswat/Desktop/JAVA/QMoney/qmoney/src/test/resources"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;18&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/shakti_sarswat/Desktop/JAVA/QMoney/qmoney/src/test/resources&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.javaproject.stock" />
@@ -96,8 +88,8 @@
       <recent name="C:\Users\shakti_sarswat\Desktop\JAVA\QMoney\qmoney\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PortfolioManagerApplicationTest">
-    <configuration name="ModuleOneTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.ModuleTwoTest.readStockFromJson">
+    <configuration name="ModuleThreeRefactorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -110,7 +102,7 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleOneTest&quot;" />
+            <option value="&quot;com.javaproject.stock.ModuleThreeRefactorTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -120,7 +112,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ModuleOneTest.mainReadFile" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ModuleThreeRefactorTest.getOpeningPriceOnStartDate" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -133,7 +125,7 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleOneTest.mainReadFile&quot;" />
+            <option value="&quot;com.javaproject.stock.ModuleThreeRefactorTest.getOpeningPriceOnStartDate&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -143,7 +135,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ModuleTwoTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ModuleThreeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -156,7 +148,7 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleTwoTest&quot;" />
+            <option value="&quot;com.javaproject.stock.ModuleThreeTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -166,7 +158,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ModuleTwoTest.mainReadQuotes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ModuleThreeTest.mainCalculateReturns" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -179,7 +171,7 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleTwoTest.mainReadQuotes&quot;" />
+            <option value="&quot;com.javaproject.stock.ModuleThreeTest.mainCalculateReturns&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -189,7 +181,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="PortfolioManagerApplicationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ModuleTwoTest.readStockFromJson" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -202,7 +194,7 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.PortfolioManagerApplicationTest&quot;" />
+            <option value="&quot;com.javaproject.stock.optional.ModuleTwoTest.readStockFromJson&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -214,11 +206,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PortfolioManagerApplicationTest" />
-        <item itemvalue="Gradle.ModuleOneTest.mainReadFile" />
-        <item itemvalue="Gradle.ModuleOneTest" />
-        <item itemvalue="Gradle.ModuleTwoTest (1)" />
-        <item itemvalue="Gradle.ModuleTwoTest.mainReadQuotes" />
+        <item itemvalue="Gradle.ModuleTwoTest.readStockFromJson" />
+        <item itemvalue="Gradle.ModuleThreeRefactorTest.getOpeningPriceOnStartDate" />
+        <item itemvalue="Gradle.ModuleThreeTest.mainCalculateReturns" />
+        <item itemvalue="Gradle.ModuleThreeTest" />
+        <item itemvalue="Gradle.ModuleThreeRefactorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -238,18 +230,33 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>90</line>
+          <line>89</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleThreeTest.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
+          <line>164</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="org.gradle.api.tasks.TaskExecutionException" package="org.gradle.api.tasks" />
