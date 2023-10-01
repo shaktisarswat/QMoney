@@ -8,8 +8,10 @@ public class PortfolioTrade {
     private int quantity;
     private TradeType tradeType;
     private LocalDate purchaseDate;
+
     public PortfolioTrade() {
     }
+
     public PortfolioTrade(String symbol, int quantity, LocalDate purchaseDate) {
         this.symbol = symbol;
         this.quantity = quantity;

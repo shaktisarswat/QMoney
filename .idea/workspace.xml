@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8306d257-2002-49c1-840b-2f87226643a5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleThreeRefactorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/ModuleThreeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/portfolio/PortfolioManagerFactoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/portfolio/PortfolioManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/PortfolioManagerApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/PortfolioManagerApplicationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +86,7 @@
       <recent name="C:\Users\shakti_sarswat\Desktop\JAVA\QMoney\qmoney\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ModuleTwoTest.readStockFromJson">
+  <component name="RunManager" selected="Gradle.ModuleTwoTest (1)">
     <configuration name="ModuleThreeRefactorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -103,29 +101,6 @@
             <option value=":qmoney:test" />
             <option value="--tests" />
             <option value="&quot;com.javaproject.stock.ModuleThreeRefactorTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ModuleThreeRefactorTest.getOpeningPriceOnStartDate" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":qmoney:test" />
-            <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleThreeRefactorTest.getOpeningPriceOnStartDate&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -158,7 +133,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ModuleThreeTest.mainCalculateReturns" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ModuleTwoTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -171,7 +146,30 @@
           <list>
             <option value=":qmoney:test" />
             <option value="--tests" />
-            <option value="&quot;com.javaproject.stock.ModuleThreeTest.mainCalculateReturns&quot;" />
+            <option value="&quot;com.javaproject.stock.ModuleTwoTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ModuleTwoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":qmoney:test" />
+            <option value="--tests" />
+            <option value="&quot;com.javaproject.stock.optional.ModuleTwoTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -206,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ModuleTwoTest.readStockFromJson" />
-        <item itemvalue="Gradle.ModuleThreeRefactorTest.getOpeningPriceOnStartDate" />
-        <item itemvalue="Gradle.ModuleThreeTest.mainCalculateReturns" />
+        <item itemvalue="Gradle.ModuleTwoTest (1)" />
+        <item itemvalue="Gradle.ModuleTwoTest" />
         <item itemvalue="Gradle.ModuleThreeTest" />
         <item itemvalue="Gradle.ModuleThreeRefactorTest" />
+        <item itemvalue="Gradle.ModuleTwoTest.readStockFromJson" />
       </list>
     </recent_temporary>
   </component>
@@ -230,12 +228,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>89</line>
+          <line>90</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>147</line>
+          <line>148</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -245,18 +243,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>157</line>
+          <line>156</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/main/java/com/javaproject/stock/PortfolioManagerApplication.java</url>
-          <line>164</line>
+          <line>161</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java</url>
           <line>23</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/qmoney/src/test/java/com/javaproject/stock/optional/ModuleTwoTest.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="org.gradle.api.tasks.TaskExecutionException" package="org.gradle.api.tasks" />
