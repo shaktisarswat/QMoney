@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +20,9 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 
 /*
@@ -48,11 +52,11 @@ class PortfolioManagerTest {
         moduleToRun = "REFACTOR";
 
 
-//        if (moduleToRun.equals("REFACTOR")) {
-//            Mockito.doReturn(getCandles(aaplQuotes)).when(portfolioManager).getStockQuote(eq("AAPL"), any(), any());
-//            Mockito.doReturn(getCandles(msftQuotes)).when(portfolioManager).getStockQuote(eq("MSFT"), any(), any());
-//            Mockito.doReturn(getCandles(googlQuotes)).when(portfolioManager).getStockQuote(eq("GOOGL"), any(), any());
-//        }
+        if (moduleToRun.equals("REFACTOR")) {
+            Mockito.doReturn(getCandles(aaplQuotes)).when(portfolioManager).getStockQuote(eq("AAPL"), any(), any());
+            Mockito.doReturn(getCandles(msftQuotes)).when(portfolioManager).getStockQuote(eq("MSFT"), any(), any());
+            Mockito.doReturn(getCandles(googlQuotes)).when(portfolioManager).getStockQuote(eq("GOOGL"), any(), any());
+        }
         PortfolioTrade trade1 = new PortfolioTrade("AAPL", 50, LocalDate.parse("2019-01-02"));
         PortfolioTrade trade2 = new PortfolioTrade("GOOGL", 100, LocalDate.parse("2019-01-02"));
         PortfolioTrade trade3 = new PortfolioTrade("MSFT", 20, LocalDate.parse("2019-01-02"));

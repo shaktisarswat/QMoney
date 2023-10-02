@@ -5,22 +5,31 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.javaproject.stock.dto.AnnualizedReturn;
 import com.javaproject.stock.dto.Candle;
 import com.javaproject.stock.dto.PortfolioTrade;
-import com.javaproject.stock.dto.TiingoCandle;
+import com.javaproject.stock.quotes.StockQuotesService;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class PortfolioManagerImpl implements PortfolioManager {
 
+    private StockQuotesService stockQuoteService;
     private RestTemplate restTemplate;
 
     // Caution: Do not delete or modify the constructor, or else your build will break!
     // This is absolutely necessary for backward compatibility
-    protected PortfolioManagerImpl(RestTemplate restTemplate) {
+    public PortfolioManagerImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+
+    public PortfolioManagerImpl(StockQuotesService stockQuoteService) {
+        this.stockQuoteService = stockQuoteService;
+    }
+
 
     public PortfolioManagerImpl() {
 
@@ -36,24 +45,16 @@ public class PortfolioManagerImpl implements PortfolioManager {
     // Make sure to exercise the tests inside PortfolioManagerTest using command below:
     // ./gradlew test --tests PortfolioManagerTest
 
-    // CHECKSTYLE:OFF
-
-    public static List<Candle> fetchCandles(PortfolioTrade trade, LocalDate endDate, String token) {
-        String url = prepareUrl(trade, endDate, token);
-        RestTemplate restTemplate = new RestTemplate();
-        TiingoCandle[] tiingoCandles = restTemplate.getForObject(url, TiingoCandle[].class);
-        return Arrays.asList(tiingoCandles);
-    }
 
     // Extract the logic to call Tiingo third-party APIs to a separate function.
     // Remember to fill out the buildUri function and use that.
 
     // Build the Url using given parameters and use this function in your code to cann the API.
-    public static String prepareUrl(PortfolioTrade trade, LocalDate endDate, String token) throws RuntimeException {
-        if (trade.getPurchaseDate().compareTo(endDate) > 0) {
+    public static String prepareUrl(String symbol, LocalDate to, LocalDate endDate, String token) throws RuntimeException {
+        if (to.compareTo(endDate) > 0) {
             throw new RuntimeException("End date is greater than purchased date");
         }
-        return String.format("https://api.tiingo.com/tiingo/daily/%s/prices?startDate=%s&endDate=%s&token=%s", trade.getSymbol(), trade.getPurchaseDate().toString(), endDate, token);
+        return String.format("https://api.tiingo.com/tiingo/daily/%s/prices?startDate=%s&endDate=%s&token=%s", symbol, to, endDate, token);
     }
 
     public static AnnualizedReturn calculateAnnualizedReturns(LocalDate endDate, PortfolioTrade trade, Double buyPrice, Double sellPrice) {
@@ -91,14 +92,15 @@ public class PortfolioManagerImpl implements PortfolioManager {
     }
 
     public List<Candle> getStockQuote(String symbol, LocalDate from, LocalDate to) throws JsonProcessingException {
-        return null;
+        return stockQuoteService.getStockQuote(symbol, from, to);
     }
 
+
     @Override
-    public List<AnnualizedReturn> calculateAnnualizedReturn(List<PortfolioTrade> portfolioTrades, LocalDate endDate) {
+    public List<AnnualizedReturn> calculateAnnualizedReturn(List<PortfolioTrade> portfolioTrades, LocalDate endDate) throws JsonProcessingException {
         ArrayList<AnnualizedReturn> annualizedReturns = new ArrayList<>();
         for (PortfolioTrade portfolioTrade : portfolioTrades) {
-            List<Candle> tiingoCandles = fetchCandles(portfolioTrade, endDate, TOKEN);
+            List<Candle> tiingoCandles = getStockQuote(portfolioTrade.getSymbol(), portfolioTrade.getPurchaseDate(), endDate);
             annualizedReturns.add(calculateAnnualizedReturns(endDate, portfolioTrade, getOpeningPriceOnStartDate(tiingoCandles), getClosingPriceOnEndDate(tiingoCandles)));
         }
         Collections.sort(annualizedReturns, getComparator());

@@ -1,7 +1,6 @@
 package com.javaproject.stock.portfolio;
 
 
-
 import org.springframework.web.client.RestTemplate;
 
 public class PortfolioManagerFactory {

@@ -17,7 +17,7 @@ class ModuleThreeTest {
         String filename = "trades.json";
 
         //when
-        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"},IFilePathLocator.TEST_JAVA_RESOURCE);
+        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"}, IFilePathLocator.TEST_JAVA_RESOURCE);
 
         //then
         List<String> symbols = result.stream().map(AnnualizedReturn::getSymbol).collect(Collectors.toList());
@@ -33,7 +33,7 @@ class ModuleThreeTest {
         String filename = "empty.json";
 
         //when
-        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"},IFilePathLocator.TEST_JAVA_RESOURCE);
+        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"}, IFilePathLocator.TEST_JAVA_RESOURCE);
 
         Assertions.assertTrue(result.isEmpty());
     }
@@ -43,7 +43,7 @@ class ModuleThreeTest {
         //given
         String filename = "trades_invalid_dates.json";
         //when
-        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"},IFilePathLocator.TEST_JAVA_RESOURCE);
+        List<AnnualizedReturn> result = PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"}, IFilePathLocator.TEST_JAVA_RESOURCE);
 
         //then
         List<String> symbols = result.stream().map(AnnualizedReturn::getSymbol).collect(Collectors.toList());
@@ -60,7 +60,7 @@ class ModuleThreeTest {
         //given
         String filename = "trades_invalid_stock.json";
         //when
-        Assertions.assertThrows(RuntimeException.class, () -> PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"},IFilePathLocator.TEST_JAVA_RESOURCE));
+        Assertions.assertThrows(RuntimeException.class, () -> PortfolioManagerApplication.mainCalculateSingleReturn(new String[]{filename, "2019-12-12"}, IFilePathLocator.TEST_JAVA_RESOURCE));
 
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.javaproject.stock.dto.*;
 import com.javaproject.stock.file.IFilePathLocator;
 import com.javaproject.stock.portfolio.PortfolioManagerImpl;
+import com.javaproject.stock.quotes.StockQuoteServiceFactory;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,8 +25,8 @@ import java.util.logging.Logger;
 
 public class PortfolioManagerApplication {
 
-    //    private final static String TIINGO_API_TOKEN = "486e149efa731d136eedba8e6ca4fce225c0c650";
-    private final static String TIINGO_API_TOKEN = "39750e91055e7031c232cfa5c952fecbe0c0fbf5";
+        private final static String TIINGO_API_TOKEN = "486e149efa731d136eedba8e6ca4fce225c0c650";
+//    private final static String TIINGO_API_TOKEN = "39750e91055e7031c232cfa5c952fecbe0c0fbf5";
 
     public static @NotNull List<String> mainReadFile(@NotNull String[] args, @NotNull String resourceType) throws IOException {
         String path = getPath(args[0], resourceType);
@@ -204,8 +205,7 @@ public class PortfolioManagerApplication {
         ObjectMapper objectMapper = PortfolioManagerApplication.getObjectMapper();
         // Extracted all the PortfolioTrades objects for symbol and purchased date
         PortfolioTrade[] portfolioTrades = objectMapper.readValue(file, PortfolioTrade[].class);
-
-        return new PortfolioManagerImpl().calculateAnnualizedReturn(Arrays.asList(portfolioTrades), endDate);
+        return new PortfolioManagerImpl(StockQuoteServiceFactory.INSTANCE.getService("Tiingo", new RestTemplate())).calculateAnnualizedReturn(Arrays.asList(portfolioTrades), endDate);
     }
 
 

@@ -1,5 +1,6 @@
 package com.javaproject.stock.portfolio;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.javaproject.stock.dto.AnnualizedReturn;
 import com.javaproject.stock.dto.PortfolioTrade;
 
@@ -14,8 +15,7 @@ public interface PortfolioManager {
     // We will not use file to transfer json data anymore, rather we will try to use java objects.
     // The reason is, this service is going to get exposed as a library in future.
 
-    List<AnnualizedReturn> calculateAnnualizedReturn(List<PortfolioTrade> portfolioTrades,
-                                                     LocalDate endDate);
+    List<AnnualizedReturn> calculateAnnualizedReturn(List<PortfolioTrade> portfolioTrades, LocalDate endDate) throws JsonProcessingException;
     //CHECKSTYLE:ON
 }
 
