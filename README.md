@@ -1,16 +1,39 @@
 # QMoney
-JSONPARSING - Resolve file from resources, use object mapper, parseit
+QMoney is a visual stock portfolio analyzer. It helps portfolio managers make trade recommendations for their clients.
 
-RESTAPI - Register on tiingo, Fetch quote from Tiingowith date, time and symbol and token using RestTemplate. Process it to find latest data on it.
+During this project,
 
-CALCULATIONS - Ideally it should be the module where TDD can be introduced. and learn how to make inline refactors for better reusability plus implementing a formula
+* Implemented the core logic of the portfolio manager and published it as a library.
+* Refactored code to add support for multiple stock quote services.
+* Improved application stability and performance.
 
-REFACTOR - Learn interfaces, Factory pattern
+# Images 
 
-GRADLE - only functional introduction to gradle. Export your code as a jar, and learn how does gradle work in general, when you import it into some other project..
+![image](https://github.com/shaktisarswat/QMoney/assets/111270536/83c1c61e-f62f-40ee-8de0-07d5eeeb2119)
 
-ADDITIONAL_REFACTOR - Add one more service provider. Learn the power of Mockito
+![image](https://github.com/shaktisarswat/QMoney/assets/111270536/e30af610-7cac-4ab7-819c-968f79ee4a06)
 
-EXCEPTIONS - get familiar with throw, catch, throws etc, along with inheritance. Basically practical example for Exceptions
 
-CONCURRENCY - Make tiingo api calls in parallel.
+# Enhance application performance
+Scope of Work
+* Improved application responsiveness by introducing multithreading.
+* Wrote unit tests to measure performance improvements.
+
+# Improve application availability and stability
+Scope of Work
+* Added support for a backup stock quote service (Alpha Vantage) to improve service availability.
+* Improved application stability with comprehensive error reporting and better exception handling.
+
+# Refactor using Java interfaces and publish a JAR file
+Scope of Work
+* Refactored code to adapt to an updated interface contract published by the backend team.
+* Published the portfolio manager library as a JAR for easy versioning and distribution.
+* Created examples to help document library (JAR) usage.
+
+# Fetch stock quotes and compute annualized stock returns
+Scope of Work
+* Used Tiingo’s REST APIs to fetch stock quotes.
+* Computed the annualized returns based on stock purchase date and holding period.
+
+# Skill Leraned
+Multithreading, Interfaces, Exception Handling, Code Refactoring, Gradle, Java, REST API, Jackson
