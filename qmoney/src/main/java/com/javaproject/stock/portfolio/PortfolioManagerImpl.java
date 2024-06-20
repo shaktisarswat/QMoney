@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.javaproject.stock.dto.AnnualizedReturn;
 import com.javaproject.stock.dto.Candle;
 import com.javaproject.stock.dto.PortfolioTrade;
+import com.javaproject.stock.exception.StockQuoteServiceException;
 import com.javaproject.stock.quotes.StockQuotesService;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +15,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 public class PortfolioManagerImpl implements PortfolioManager {
 
@@ -105,5 +111,33 @@ public class PortfolioManagerImpl implements PortfolioManager {
         }
         Collections.sort(annualizedReturns, getComparator());
         return annualizedReturns;
+    }
+
+    @Override
+    public List<AnnualizedReturn> calculateAnnualizedReturnParallel(
+            List<PortfolioTrade> portfolioTrades, LocalDate endDate, int numThreads)
+            throws StockQuoteServiceException {
+
+        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
+        List<AnnualizedReturn> annualizedReturns = new ArrayList<>();
+        List<AnnualizedReturnTask> annualizedReturnTaskList = new ArrayList<>();
+        List<Future<AnnualizedReturn>> annualizedReturnFutureList = null;
+        for (PortfolioTrade portfolioTrade : portfolioTrades)
+            annualizedReturnTaskList
+                    .add(new AnnualizedReturnTask(portfolioTrade, stockQuoteService, endDate));
+        try {
+            annualizedReturnFutureList = executorService.invokeAll(annualizedReturnTaskList);
+        } catch (InterruptedException e) {
+            throw new StockQuoteServiceException(e.getMessage());
+        }
+        for (Future<AnnualizedReturn> annualizedReturnFuture : annualizedReturnFutureList) {
+            try {
+                annualizedReturns.add(annualizedReturnFuture.get());
+            } catch (InterruptedException | ExecutionException e) {
+                throw new StockQuoteServiceException(e.getMessage());
+            }
+        }
+        executorService.shutdown();
+        return annualizedReturns.stream().sorted(getComparator()).collect(Collectors.toList());
     }
 }

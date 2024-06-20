@@ -8,7 +8,7 @@
     </Console>
 
     <File append="true"
-      fileName="${env:HOME}/.gradle/daemon/runlogs/qmoney_analysis_app.log"
+      fileName="resources/runtime.log"
       ignoreExceptions="false"
       name="LogFileAppender">
       <JsonLayout compact="true" eventEol="true" includeStacktrace="true">

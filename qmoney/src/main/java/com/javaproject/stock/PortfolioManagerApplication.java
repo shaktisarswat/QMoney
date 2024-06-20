@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 public class PortfolioManagerApplication {
 
-        private final static String TIINGO_API_TOKEN = "486e149efa731d136eedba8e6ca4fce225c0c650";
+    private final static String TIINGO_API_TOKEN = "486e149efa731d136eedba8e6ca4fce225c0c650";
 //    private final static String TIINGO_API_TOKEN = "39750e91055e7031c232cfa5c952fecbe0c0fbf5";
 
     public static @NotNull List<String> mainReadFile(@NotNull String[] args, @NotNull String resourceType) throws IOException {
@@ -206,6 +206,7 @@ public class PortfolioManagerApplication {
         // Extracted all the PortfolioTrades objects for symbol and purchased date
         PortfolioTrade[] portfolioTrades = objectMapper.readValue(file, PortfolioTrade[].class);
         return new PortfolioManagerImpl(StockQuoteServiceFactory.INSTANCE.getService("Tiingo", new RestTemplate())).calculateAnnualizedReturn(Arrays.asList(portfolioTrades), endDate);
+//        return new PortfolioManagerImpl(StockQuoteServiceFactory.INSTANCE.getService("Tiingo", new RestTemplate())).calculateAnnualizedReturnParallel(Arrays.asList(portfolioTrades), endDate,1);
     }
 
 
